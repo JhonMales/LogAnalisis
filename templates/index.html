@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Analysis Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Resumen del Análisis de Logs</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <p><strong>Total de Logs:</strong> {{ log_data.total_logs }}</p>
+                <p><strong>Logs de Error:</strong> {{ log_data.error_logs }}</p>
+                <p><strong>Logs de Advertencia:</strong> {{ log_data.warning_logs }}</p>
+                <p><strong>Logs de Información:</strong> {{ log_data.info_logs }}</p>
+            </div>
+        </div>
+
+        <h3 class="text-center">Dashboard</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="logTypeChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="dailyLogChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+    <script>
+        const logData = {{ log_data | tojson }};
+    </script>
+</body>
+</html>
